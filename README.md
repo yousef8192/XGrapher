@@ -1,12 +1,6 @@
 # XGrapher
 
 
-
-<!-- <br/> -->
-<!-- <img src="img/demo_dark.png" width="864" height="450"/> -->
-<!-- <br/> -->
-
-
 Light Mode                | Dark Mode 
 :------------------------:|:---------------------------------:
 ![](img/plotting_multiple_graphs_demo_light.png)   | ![](img/plotting_multiple_graphs_demo_dark.png) 
@@ -22,7 +16,7 @@ Light Mode                | Dark Mode
 * [XGrapher DEMO (Plotting)](#xgrapher-demo-plotting)
   * [# y = x](#-y--x)
   * [# y = x/x](#-y--xx)
-  * [# y = constant :](#-y--constant-)
+  * [# y = constant](#-y--constant)
   * [# y = x^2](#-y--x2)
   * [# y = sqrt(x) in range range contains -ve and +ve [-100, 100]](#-y--sqrtx-in-range-range-contains--ve-and-ve--100-100)
   * [# y = log10(x) in range range contains -ve and +ve [-100, 100]](#-y--log10x-in-range-range-contains--ve-and-ve--100-100)
@@ -48,6 +42,29 @@ Light Mode                | Dark Mode
   * [# Toggleable Light and Dark Modes](#-toggleable-light-and-dark-modes)
 * [XGrapher DEMO (Customization Settings)](#xgrapher-demo-customization-settings)
   * [# Extensive Graph Customization Settings](#-extensive-graph-customization-settings)
+* [XGrapher Code Documentation (Logic Code)](#xgrapher-code-documentation-logic-code)
+  * [1. plot_equation(...)](#1-plot_equation)
+  * [2. process_inputs(...)](#2-process_inputs)
+  * [3. update_min_max_coordinates(...)](#3-update_min_max_coordinates)
+  * [4. compute_domain(...)](#4-compute_domain)
+  * [5. compute_intersection(...)](#5-compute_intersection)
+  * [6. compute_asymptotic_points(...)](#6-compute_asymptotic_points)
+  * [7. insert_asymptotic_points(...)](#7-insert_asymptotic_points)
+  * [8. insert_fitting_points(...)](#8-insert_fitting_points)
+* [XGrapher Code Documentation (GUI Code)](#xgrapher-code-documentation-gui-code)
+  * [1. __init__(...)](#1-__init__)
+  * [2. create_tool_bar(...)](#2-create_tool_bar)
+  * [3. create_status_bar(...)](#3-create_status_bar)
+  * [4. create_keypad(...)](#4-create_keypad)
+  * [5. create_range_fields(...)](#5-create_range_fields)
+  * [6. create_graph(...)](#6-create_graph)
+  * [7. create_y_zoom_slider(...)](#7-create_y_zoom_slider)
+  * [8. create_x_zoom_slider(...)](#8-create_x_zoom_slider)
+  * [9. y_zoom_slider_slot(...)](#9-y_zoom_slider_slot)
+  * [10. x_zoom_slider_slot(...)](#10-x_zoom_slider_slot)
+  * [11. status_bar_print(...)](#11-status_bar_print)
+  * [12. update_legend(...)](#12-update_legend)
+  * [13. set_graphical_mode(...)](#13-set_graphical_mode)
 * [Key Features](#key-features)
 * [Technical Details](#technical-details)
 * [Dependencies &amp; Installation](#dependencies--installation)
@@ -236,9 +253,6 @@ Curves customization            | Axes customization
 8. insert_fitting_points(...)
 
 
-<br/>
-
-
 ### 1. plot_equation(...)
 * plot_equation(main_window, equation, x_min_inputted, x_max_inputted)
 * This is the main function that plots the given equation.
@@ -340,7 +354,7 @@ The following represents the Documentation the main methods of the class:
 3. create_status_bar(...)
 4. create_keypad(...)
 5. create_range_fields(...)
-6. create_axes(...)
+6. create_graph(...)
 7. create_y_range_slider(...)
 8. create_x_range_slider(...)
 9. y_range_slider_slot(...)
@@ -349,46 +363,76 @@ The following represents the Documentation the main methods of the class:
 12. update_legend(...)
 13. set_graphical_mode(...)
 
-<br/>
 
 ### 1. \_\_init\_\_(...)
 * \_\_init\_\_(self, SCREEN_WIDTH, SCREEN_HEIGHT)
+* This method is constructor of the XGrapherWindow class
+* This method is responsible for creating the main window of the application and setting its dimensions relative to the screen resolution
+* By default, this method will set the graphical mode to light
+* All OS specific operations are handled by the os python module to ensure the application achieves cross-platform experience
 
 ### 2. create_tool_bar(...)
 * create_tool_bar(self)
+* This method is repsonsible for creating the Tool Bar
 
 ### 3. create_status_bar(...)
 * create_status_bar(self)
+* This method is repsonsible for creating the Status Bar
 
 ### 4. create_keypad(...)
 * create_keypad(self)
+* This method is repsonsible for creating the Keypad and the Equation's Input Field
 
 ### 5. create_range_fields(...)
 * create_range_fields(self)
+* This method is repsonsible for creating the Input Field for the minimum and maximum x values
 
-### 6. create_axes(...)
-* create_axes(self)
+### 6. create_graph(...)
+* create_graph(self)
+* This method is repsonsible for creating the graph in which we will plot into
 
-### 7. create_y_range_slider(...)
-* create_y_range_slider(self)
+### 7. create_y_zoom_slider(...)
+* create_y_zoom_slider(self)
+* This method is responsible for creating the y-zoom slider and connecting its signal to its appropriate slot
 
-### 8. create_x_range_slider(...)
-* create_x_range_slider(self)
+### 8. create_x_zoom_slider(...)
+* create_x_zoom_slider(self)
+* This method is responsible for creating the x-zoom slider and connecting its signal to its appropriate slot
 
-### 9. y_range_slider_slot(...)
-* y_range_slider_slot(self)
+### 9. y_zoom_slider_slot(...)
+* y_zoom_slider_slot(self)
+* This method represents the slot connected to the signal fired by the y-zoom slider 
+* It is responsible for stretching in and out the Y-Axis for achieving an enhanced view and better user experience overall
+* The algorithm of the slot is that it centers the plot according to the minimum and maximum y points among all the curves in the plot 
+* Then the y-zoom slider stretches and shrinks the y-axis accordingly
+* The minimum and maximum y points are being continuously updated by the update_min_max_coordinates() function each time a curve gets plotted
 
-### 10. x_range_slider_slot(...)
-* x_range_slider_slot(self)
+### 10. x_zoom_slider_slot(...)
+* x_zoom_slider_slot(self)
+* This method represents the slot connected to the signal fired by the x-zoom slider 
+* It is responsible for stretching in and out the X-Axis for achieving an enhanced view and better user experience overall
+* The algorithm of the slot is that it centers the plot according to the minimum and maximum x points among all the curves in the plot 
+* Then the x-zoom slider stretches and shrinks the x-axis accordingly
+* The minimum and maximum x points are being continuously updated by the update_min_max_coordinates() function each time a curve gets plotted
 
 ### 11. status_bar_print(...)
 * status_bar_print(self, message, status)
+* This function is responsible for dynamically updating the status bar with the appropriate message and status color
+* The if else implementation for this function is preferred over python's switch statement for the sake of backward compatibility
+    - status == 0 : indicates Success
+    - status < 0  : indicates Error
+    - status > 0  : indicates Warning
 
 ### 12. update_legend(...)
 * update_legend(self)
+* This function updates the legend, which is the area at the top left that displays the functions that are plotted
 
 ### 13. set_graphical_mode(...)
 * set_graphical_mode(self, graphical_mode)
+* This function is responsible for changing the graphical mode of the application
+    - graphical_mode >  0   :   light mode
+    - graphical_mode <= 0   :   dark mode
+
 
 
 <br/>

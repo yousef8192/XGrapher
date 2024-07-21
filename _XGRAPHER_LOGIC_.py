@@ -1,17 +1,69 @@
 
-# It is preferred to have separate file for the imports 
+# It is preferred to have a separate file for the imports 
 # since as the project grows and uses more libraries and frameworks, the
 # imports will bloat the file which might be a bit annoying for the developers
 from _XGRAPHER_LOGIC_IMPORTS_ import *
 
+
+
 # This is the main function that plots the given equation
-# Its implementation code is well documented, please delve into the function and read it from within it
-def graph_equation(main_window, equation, x_min_inputted, x_max_inputted):
+# It simply calls the process_inputs() function and if it succeeds then it plots the equation and returns True
+# Else it returns False indicating unsucessful plotting
+# This function's implementation code is well explained & documented, please delve into the function and read from within it
+def plot_equation(main_window, equation, x_min_inputted, x_max_inputted):
+
+    # equation_str represents the equation after:
+    #   1. ensuring it has no ** (since this represents the exponentiation operator in python)
+    #   2. removing any space character present
+    # this step fixes some syntax errors done by the user and causes some misconceptions to him/her
+    # fixed syntax errors : if the user entered "5 .2*x" it will get interpreted as 5.2*x
+    # misconceptions to the user : if the user entered "5 .2*x" he/she might think it will get interpreted as 5*0.2*x
+    equation_str = ''.join(equation.split()) 
+
+    # Here the inputs are being processed and the processing_state is being returned
+    # this processing_state will either be:
+    # - True in case of sucessful processing 
+    # - False in case of unsucessful processing 
+    # x_points_intersection_range & y_points_intersection_range represent the x & y points in the intersection 
+    # range between the inputted range and the domain of the function respectively (if any)
+    processing_state, x_points_intersection_range, y_points_intersection_range = process_inputs(main_window, equation, x_min_inputted, x_max_inputted)
+    
+    # if unsucessful processing, return False indicating unsucessful plotting of the equation
+    # else plot the equation and return True indicating sucessful plotting of the equation
+    if (processing_state != True) :
+        return False
+    else :
+        # Here the curve is plotted after all the sanitization and processing done
+        main_window.graph.plot(x_points_intersection_range, y_points_intersection_range, label="y = "+equation_str)
+         
+        # Here the legend is being updated to display the label of the new function
+        main_window.update_legend()
+
+        # Here the graph is updated to display the new curve and its legend
+        main_window.canvas.draw()
+
+        return True
+
+    return True
+ 
+
+
+# This function is called with each sucessful equation plotting attempt
+# This function is by far the largest & most complex function in the program
+# Most of the computational processing happens in this function, such as :
+# - computing the equation's domain 
+# - checking if there is intersection between the inputted range and the equation's domain
+# - checking if asymptotic points exists in that intersection
+# - inserting these asymptotic points and fitting points around them (if any) to smoothen the curve
+# Also, Input Sanitization and Error Handling happens in this function rather being placed in a separate function
+# This is preferred since they reside in before, in between, and after the processing phase so it would be hard to place them in a separate function
+# This function's implementation code is well explained & documented, please delve into the function and read from within it
+def process_inputs(main_window, equation, x_min_inputted, x_max_inputted):
 
     # '**' is considered syntax error, user must use '^' for exponentiation
     if (equation.find('**') > -1):
         main_window.status_bar_print("Syntax Error! Please make sure you entered the equation properly and try again...", -1)
-        return False
+        return [False, [], []]
 
     # This code block checks if x_min_inputted and x_max_inputted are real numbers that can be processed
     # It does so by attempting to convert the input to float and checks whether the operation is sucessful or not
@@ -20,12 +72,12 @@ def graph_equation(main_window, equation, x_min_inputted, x_max_inputted):
         x_max_inputted = float(x_max_inputted)
     except :
         main_window.status_bar_print("Error! The provided range is invalid, please enter an appropriate range and try again...", -1)
-        return False
+        return [False, [], []]
 
     # This code block checks if the input range is reversed or there is nor range at all (i.e. user entered the same point twice)
     if (x_min_inputted>=x_max_inputted):
         main_window.status_bar_print("Error! The provided range is invalid, please enter an appropriate range and try again...", -1)
-        return False
+        return [False, [], []]
 
 
     # equation_str represents the equation after:
@@ -49,17 +101,14 @@ def graph_equation(main_window, equation, x_min_inputted, x_max_inputted):
         if ((x_min_inputted == numpy.inf) or (x_max_inputted == numpy.inf)):
             raise OverflowError
         update_min_max_coordinates(main_window, [x_min_inputted, x_max_inputted], [horizontal_line_dy-10, horizontal_line_dy+10])
-        main_window.graph.plot(numpy.array([x_min_inputted, x_max_inputted]), [horizontal_line_dy, horizontal_line_dy], label="y = "+equation_str)
-        main_window.update_legend()
-        main_window.canvas.draw() # update the graph
     except ValueError:
         pass
     except (FloatingPointError, OverflowError):
         main_window.status_bar_print("Error! Please Ensure that the equation doesn't cause overflow within the specified range...", -1)
-        return False
+        return [False, [], []]
     else:
         main_window.status_bar_print("Successfully plotted the equation!", 0)
-        return True
+        return [True, numpy.array([x_min_inputted, x_max_inputted]), [horizontal_line_dy, horizontal_line_dy]]
 
 
     # equation_exec represents the equation parsed and ready to be executed using the eval() function. 
@@ -86,7 +135,7 @@ def graph_equation(main_window, equation, x_min_inputted, x_max_inputted):
         # else, we check if the equation contains any asymptotic points over the range of intersection and store them in the list asymptotic_points
         if (len(intersection) < 2):
             main_window.status_bar_print("Warning, no intersection exists between the specified range and the equation's domain", 1)
-            return False
+            return [False, [], []]
         else:
             asymptotic_points = compute_asymptotic_points(intersection)
 
@@ -132,32 +181,24 @@ def graph_equation(main_window, equation, x_min_inputted, x_max_inputted):
         # Here the x_points_intersection_range is converted back to numpy.ndarray() because matplotlib plot() function obliges so
         x_points_intersection_range = numpy.array(x_points_intersection_range)
 
-        # Here the curve is plotted after all the sanitization and processing done
-        main_window.graph.plot(x_points_intersection_range, y_points_intersection_range, label="y = "+equation_str)
-         
-        # Here the legend is being updated to display the label of the new function
-        main_window.update_legend()
-
-        # Here the graph is updated to display the new curve and its legend
-        main_window.canvas.draw()
     except (SyntaxError, NameError):
         # Any SyntaxError/NameError in the equation the user provided will be caught and he/she will be informed
         main_window.status_bar_print("Syntax Error! Please make sure you entered the equation properly and try again...", -1)
-        return False
+        return [False, [], []]
     except (FloatingPointError, OverflowError):
         # Any FloatingPointError/OverflowError in the equation the user provided will be caught and he/she will be informed
         main_window.status_bar_print("Error! Please Ensure that the equation doesn't cause overflow within the specified range...", -1)
-        return False
+        return [False, [], []]
     else:
         # If no exceptions encountered, that means the equation was plotted successfully
         main_window.status_bar_print("Successfully plotted the equation!", 0)
-        return True
+        return [True, x_points_intersection_range, y_points_intersection_range]
 
-    return True
+    return [True, x_points_intersection_range, y_points_intersection_range]
 
 
-# This function is called with each equation plotting attempt
-# It checks if the horizontal/vertical limits of it exceeds the maximum 
+# This function is called with each sucessful equation plotting attempt
+# It checks if the horizontal/vertical limits of it exceeds the maximum
 # horizontal/vertical limits of all equations plotted and if so it updates them
 # This function is essential to adjust the ranges in which the y & x zoom sliders operate within
 def update_min_max_coordinates(main_window, x_points_intersection_range, y_points_intersection_range):
@@ -170,7 +211,7 @@ def update_min_max_coordinates(main_window, x_points_intersection_range, y_point
     # this case happens when the user enters an equation that yields the same value for all x points (for an instance x/x)
     # this case is handled by adding tolerance of +-10 around the horizontal line plotted so that the slider can operate in
     # this case happens for y only and not for x, since the user isn't allowed to enter the same value for x_min and 
-    # x_max and if he did so this error will be handled in graph_equation() function
+    # x_max and if he did so this error will be handled in plot_equation() function
     if (min_y_in_curve, max_y_in_curve):
         min_y_in_curve = min_y_in_curve-10
         max_y_in_curve = max_y_in_curve+10
@@ -198,6 +239,7 @@ def update_min_max_coordinates(main_window, x_points_intersection_range, y_point
         
 
 
+# This function is called with each sucessful equation plotting attempt
 # This function utilizes the sympy library to compute the domain of the equation 
 # This function is essential since we must check whether the equation's domain has 
 # an intersection with the range that the user inputted in which we can plot the curve in
@@ -209,6 +251,7 @@ def compute_domain(equation):
     domain = str(domain)
     return domain
 
+# This function is called with each sucessful equation plotting attempt
 # This function uses the sympy library to compute the intersecion between the provided x range and the domain of the function
 # First it computes the Intersection and converts it to string then it parses it
 # Then it splits it and converts it to a List so that it can be processed more easily in the other functions
@@ -233,10 +276,11 @@ def compute_intersection(x_points_range_sympy, domain):
         intersection = [float(n) for n in intersection]
     return intersection
 
+# This function is called with each sucessful equation plotting attempt
 # This Function assumes that the parsed intersection is valid and contains at least two elements (else it returns an empty list anyways)
 # This Function assumes that asymptotic point is a point whose curve approaches an infinite vertical line at its location *from both sides* (such as in 1/(x-2))
 # This Function doesn't consider points whose curve approaches an infinite vertical line at it location  *from a single side* to be an asymptotic point (such as log10(x))
-# the algorithm used by the function to find Asymptotic points is as follows (assume intersection holds [-100, 2, 2, 5, 5, 100]): 
+# The algorithm used by the function to find Asymptotic points is as follows (assume intersection holds [-100, 2, 2, 5, 5, 100]): 
 # 1. pop the first and last points from the intersection, where these points represent the limits of the intersection (thus intersection will be = [2, 2, 5, 5])
 # 2. remove any duplicates present by converting intersection to set then to list again (thus intersection will be [2, 5])
 # 3. assign parsed_intersectoin to asymptotic_points
@@ -252,12 +296,13 @@ def compute_asymptotic_points(intersection):
         assymptotic_points.sort()
     return assymptotic_points
 
+# This function is called with each sucessful equation plotting attempt.
 # This function inserts nan for each asymptotic point of the equation.
 # This is required to avoid undesired connections between the minimum and maximum points around the asymptotic point.
 # This Function uses an efficient binary search algorithm to search whether the asymptotic points are already 
 # inserted and if so it does nothing (since that means they've been inserted earlier with either inf or nan), else it inserts them.
 # This function inserts into sorted lists while preserving them being sorted, that's why binary search is used.
-# Complexity of the function is m*nlog(n) where:
+# The Complexity of this function is m*nlog(n) where:
 #   - m = number of asymptotic points
 #   - n = number of x-point samples (constant determined by the code (roughly around 1e4))
 # Therefore assuming n = 1e4, the function will require roughly 1 second of computational time for each 1e3 asymptotic point.
@@ -277,14 +322,19 @@ def insert_asymptotic_points(asymptotic_points, x_points_intersection_range, y_p
             x_points_intersection_range.insert(low, point)
             y_points_intersection_range.insert(low, numpy.nan)
 
+# This function is called with each sucessful equation plotting attempt.
 # This function inserts a group of fitting points around each asymptotic point.
 # This is required to improve the curve smoothnes at these points and avoid sudden rises and falls around them.
 # This Function uses an efficient binary search algorithm to search whether the fitting points are already 
 # inserted and if so it does nothing (since that means they've been inserted earlier with their corresponding y values), else it inserts them.
 # This function inserts into sorted lists while preserving them being sorted, that's why binary search is used.
-# The complexity of this function is nlog(n) where n is ((number of asymptotic points)*(1e3))
-# Therefore according to this complexity, the function will require roughly 1 second of computational time for each 1e5 asymptotic point.
-# It is experimentally found that 6e-1 and 1e3 are appropriate and suitable values that :
+# The Complexity of this function is m*nlog(n) where:
+#   - m = number of fitting points = 5e1 * number of asymptotic points
+#   - n = number of x-point samples (constant determined by the code (roughly around 1e4))
+# Therefore according to this complexity, the function will require roughly 1 second of computational time for each 1e2 asymptotic point.
+# This complexity is by far acceptable, but for plotting equations with large number of asymptotic points it is recommended to go with a 
+# more efficient algorithmic approach that has a better time complexity than this one
+# It is experimentally found that 6e-1 and 5e1 are appropriate and suitable values that :
 # 1. Achieve the desired curve smoothnes around the asymptotic points
 # 2. Achieve an applicable execution time for the function according to its complexity
 # 3. Do not cause the y-zoom slider to overshoot
@@ -292,7 +342,7 @@ def insert_fitting_points(asymptotic_points, x_points_intersection_range, y_poin
 
     fitting_points = []
     for point in asymptotic_points:
-        fitting_range = [float(i) for i in numpy.linspace(point+6e-1, point-6e-1, 1000)]
+        fitting_range = [float(i) for i in numpy.linspace(point+6e-1, point-6e-1, 50)]
         fitting_points = fitting_points+fitting_range 
 
 
@@ -310,7 +360,5 @@ def insert_fitting_points(asymptotic_points, x_points_intersection_range, y_poin
             x_points_intersection_range.insert(low, point)
             x = point # to substitute in the x present in the equation_exec
             y_points_intersection_range.insert(low, eval(equation_exec))
-
-
 
 

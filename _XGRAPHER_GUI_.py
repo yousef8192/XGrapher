@@ -1,4 +1,4 @@
-# It is preferred to have separate file for the imports 
+# It is preferred to have aseparate file for the imports 
 # since as the project grows and uses more libraries and frameworks, the
 # imports will bloat the file which might be a bit annoying for the developers
 from _XGRAPHER_GUI_IMPORTS_ import * 
@@ -7,7 +7,10 @@ from _XGRAPHER_GUI_IMPORTS_ import *
 # This class contains all the gui related objects and methods needed for the application to operate
 class XGrapherWindow(QMainWindow):
 
-    # constructor of the XGrapherWindow class
+    # This method is constructor of the XGrapherWindow class
+    # This method is responsible for creating the main window of the application and setting its dimensions relative to the screen resolution
+    # By default, this method will set the graphical mode to light
+    # All OS specific operations are handled by the os python module to ensure the application achieves cross-platform experience
     def __init__(self, SCREEN_WIDTH, SCREEN_HEIGHT):
         super().__init__()
 
@@ -23,7 +26,7 @@ class XGrapherWindow(QMainWindow):
 
         self.create_keypad() 
         self.create_range_fields() 
-        self.create_axes() 
+        self.create_graph() 
         self.create_y_range_slider()
         self.create_x_range_slider()
 
@@ -34,7 +37,10 @@ class XGrapherWindow(QMainWindow):
         self.set_graphical_mode(self.graphical_mode)
 
 
-    def create_tool_bar(self):
+
+
+    # This method is repsonsible for creating the Tool Bar 
+    def create_tool_bar(self): 
 
         self.tool_bar = NavigationToolbar2QT(self.canvas, self)
 
@@ -50,6 +56,8 @@ class XGrapherWindow(QMainWindow):
         self.addToolBar(self.tool_bar)
 
 
+
+    # This method is repsonsible for creating the Status Bar 
     def create_status_bar(self):
         self.status_bar = self.statusBar()
         self.status_bar.showMessage("Welcome to XGrapher!! Please insert an equation to plot...")
@@ -58,6 +66,7 @@ class XGrapherWindow(QMainWindow):
         self.status_bar.setStyleSheet("font-size: 24px; font-weight:600; color:#CECECE; background-color:#2D2D2D; border:1.2px solid #707070")
 
 
+    # This method is repsonsible for creating the Keypad and the Equation's Input Field 
     def create_keypad(self):
 
         self.keypad_container = QWidget()
@@ -67,13 +76,13 @@ class XGrapherWindow(QMainWindow):
         self.equation_field   = QLineEdit()
         self.equation_field.setPlaceholderText("Enter the Equation...")
         self.equation_field.setAlignment(Qt.AlignLeft)
-        self.equation_field.returnPressed.connect(lambda : graph_equation(self, self.equation_field.text(), self.x_min_field.text(), self.x_max_field.text()))
+        self.equation_field.returnPressed.connect(lambda : plot_equation(self, self.equation_field.text(), self.x_min_field.text(), self.x_max_field.text()))
 
-        self.button_graph        = QPushButton('Graph',      clicked = lambda : (graph_equation(self, self.equation_field.text(), self.x_min_field.text(), self.x_max_field.text()),
+        self.button_graph        = QPushButton('Graph',      clicked = lambda : (plot_equation(self, self.equation_field.text(), self.x_min_field.text(), self.x_max_field.text()),
                                                                             self.equation_field.setFocus(),
                                                                             self.equation_field.clearFocus()))
 
-        self.button_equal        = QPushButton('=',          clicked = lambda : (graph_equation(self, self.equation_field.text(), self.x_min_field.text(), self.x_max_field.text()),
+        self.button_equal        = QPushButton('=',          clicked = lambda : (plot_equation(self, self.equation_field.text(), self.x_min_field.text(), self.x_max_field.text()),
                                                                             self.equation_field.setFocus(),
                                                                             self.equation_field.clearFocus()))
 
@@ -179,16 +188,16 @@ class XGrapherWindow(QMainWindow):
 
         self.main_widget.layout().addWidget(self.keypad_container,          0, 0, 1, 1)
 
-        
 
 
+    # This method is repsonsible for creating the Input Field for the minimum and maximum x values
     def create_range_fields(self):
 
         self.x_min_label = QLabel("Minimum value for x :  ")
         self.x_min_field = QLineEdit()
         self.x_min_field.setAlignment(Qt.AlignCenter) 
         self.x_min_field.setPlaceholderText(".......")
-        self.x_min_field.returnPressed.connect(lambda : graph_equation(self, self.equation_field.text(), self.x_min_field.text(), self.x_max_field.text()))
+        self.x_min_field.returnPressed.connect(lambda : plot_equation(self, self.equation_field.text(), self.x_min_field.text(), self.x_max_field.text()))
         self.x_min_label_input = QWidget()
         self.x_min_label_input.setLayout(QGridLayout())
         self.x_min_label_input.layout().addWidget(self.x_min_label,        0, 0, 1, 1 )
@@ -198,7 +207,7 @@ class XGrapherWindow(QMainWindow):
         self.x_max_field = QLineEdit()
         self.x_max_field.setAlignment(Qt.AlignCenter) 
         self.x_max_field.setPlaceholderText(".......")
-        self.x_max_field.returnPressed.connect(lambda : graph_equation(self, self.equation_field.text(), self.x_min_field.text(), self.x_max_field.text()))
+        self.x_max_field.returnPressed.connect(lambda : plot_equation(self, self.equation_field.text(), self.x_min_field.text(), self.x_max_field.text()))
         self.x_max_label_input = QWidget()
         self.x_max_label_input.setLayout(QGridLayout())
         self.x_max_label_input.layout().addWidget(self.x_max_label,        0, 0, 1, 1 )
@@ -208,7 +217,10 @@ class XGrapherWindow(QMainWindow):
         self.keypad_container.layout().addWidget(self.x_max_label_input,   11, 0, 1, 3)
 
 
-    def create_axes(self):
+
+
+    # This method is repsonsible for creating the graph in which we will plot into 
+    def create_graph(self):
         
         self.min_y_in_graph = -0.05
         self.max_y_in_graph = 0.05
@@ -233,39 +245,44 @@ class XGrapherWindow(QMainWindow):
         self.main_widget.layout().addWidget(self.canvas, 0, 4, 1, 1)
 
 
-    def create_y_range_slider(self):
 
-        self.y_range_slider = QSlider(Qt.Vertical)
-        self.y_range_slider.setMinimum(1)
-        self.y_range_slider.setMaximum(10000)
-        self.y_range_slider.setValue(1000)
+    # This method is responsible for creating the y-zoom slider and connecting its signal to its appropriate slot
+    def create_y_zoom_slider(self):
+
+        self.y_zoom_slider = QSlider(Qt.Vertical)
+        self.y_zoom_slider.setMinimum(1)
+        self.y_zoom_slider.setMaximum(10000)
+        self.y_zoom_slider.setValue(1000)
         
-        self.y_range_slider.valueChanged.connect(self.y_range_slider_slot)
+        self.y_zoom_slider.valueChanged.connect(self.y_zoom_slider_slot)
 
         self.main_widget.layout().setColumnMinimumWidth(1,25)   # separator of width 25px
-        self.main_widget.layout().addWidget(self.y_range_slider, 0, 2, 1, 1)
+        self.main_widget.layout().addWidget(self.y_zoom_slider, 0, 2, 1, 1)
         self.main_widget.layout().setColumnMinimumWidth(3,5)   # separator of width 5px
 
 
-    def create_x_range_slider(self):
+    # This method is responsible for creating the x-zoom slider and connecting its signal to its appropriate slot
+    def create_x_zoom_slider(self):
 
-        self.x_range_slider = QSlider(Qt.Horizontal)
-        self.x_range_slider.setMinimum(1)
-        self.x_range_slider.setMaximum(10000)
-        self.x_range_slider.setValue(1000)
+        self.x_zoom_slider = QSlider(Qt.Horizontal)
+        self.x_zoom_slider.setMinimum(1)
+        self.x_zoom_slider.setMaximum(10000)
+        self.x_zoom_slider.setValue(1000)
         
-        self.x_range_slider.valueChanged.connect(self.x_range_slider_slot)
+        self.x_zoom_slider.valueChanged.connect(self.x_zoom_slider_slot)
 
-        self.main_widget.layout().addWidget(self.x_range_slider, 1, 4, 1, 1)
+        self.main_widget.layout().addWidget(self.x_zoom_slider, 1, 4, 1, 1)
 
 
+    # This method represents the slot connected to the signal fired by the y-zoom slider 
+    # It is responsible for stretching in and out the Y-Axis for achieving an enhanced view and better user experience overall
     # The algorithm of the slot is that it centers the plot according to the minimum and maximum y points among all the curves in the plot 
     # Then the y-zoom slider stretches and shrinks the y-axis accordingly
     # The minimum and maximum y points are being continuously updated by the update_min_max_coordinates() function each time a curve gets plotted
-    def y_range_slider_slot(self):
+    def y_zoom_slider_slot(self):
 
-        slider_value_inverted = self.y_range_slider.maximum() - self.y_range_slider.value() + 1    # the + 1 is to avoid falling down to 0
-        slider_value_scaled   = slider_value_inverted/self.y_range_slider.maximum()
+        slider_value_inverted = self.y_zoom_slider.maximum() - self.y_zoom_slider.value() + 1    # the + 1 is to avoid falling down to 0
+        slider_value_scaled   = slider_value_inverted/self.y_zoom_slider.maximum()
         y_mid                 = (self.min_y_in_graph + self.max_y_in_graph)/2
         y_half_range          = (self.max_y_in_graph - self.min_y_in_graph)/2
         y_min_new             = y_mid - slider_value_scaled*y_half_range
@@ -275,13 +292,16 @@ class XGrapherWindow(QMainWindow):
         self.canvas.draw()
 
 
+
+    # This method represents the slot connected to the signal fired by the x-zoom slider 
+    # It is responsible for stretching in and out the X-Axis for achieving an enhanced view and better user experience overall
     # The algorithm of the slot is that it centers the plot according to the minimum and maximum x points among all the curves in the plot 
     # Then the x-zoom slider stretches and shrinks the x-axis accordingly
     # The minimum and maximum x points are being continuously updated by the update_min_max_coordinates() function each time a curve gets plotted
-    def x_range_slider_slot(self):
+    def x_zoom_slider_slot(self):
 
-        slider_value_inverted = self.x_range_slider.maximum() - self.x_range_slider.value() + 1    # the + 1 is to avoid falling down to 0
-        slider_value_scaled   = slider_value_inverted/self.x_range_slider.maximum()
+        slider_value_inverted = self.x_zoom_slider.maximum() - self.x_zoom_slider.value() + 1    # the + 1 is to avoid falling down to 0
+        slider_value_scaled   = slider_value_inverted/self.x_zoom_slider.maximum()
         x_mid                 = (self.min_x_in_graph + self.max_x_in_graph)/2
         x_half_range          = (self.max_x_in_graph - self.min_x_in_graph)/2
         x_min_new             = x_mid - slider_value_scaled*x_half_range
@@ -291,11 +311,13 @@ class XGrapherWindow(QMainWindow):
         self.canvas.draw()
 
 
+
+    # This function is responsible for dynamically updating the status bar with the appropriate message and status color
+    # status == 0 : indicates Success
+    # status < 0  : indicates Error
+    # status > 0  : indicates Warning
+    # The if else implementation for this function is preferred over python's switch statement for the sake of backward compatibility
     def status_bar_print(self, message, status):
-        # status == 0 : indicates Success
-        # status < 0  : indicates Error
-        # status > 0  : indicates Warning
-        # if else implementation is preferred to python's switch statement for the sake of backward compatibility
 
         if self.graphical_mode > 0:
             bg_color = "#E2E2E2"
@@ -319,7 +341,6 @@ class XGrapherWindow(QMainWindow):
     # This function updates the legend, which is the area at the top left that displays the functions that are plotted
     def update_legend(self):
 
-
         self.legend = self.graph.legend(loc='upper left')
         if self.graphical_mode > 0:
             self.legend.get_frame().set_facecolor('#FFFFFF') 
@@ -329,9 +350,11 @@ class XGrapherWindow(QMainWindow):
             for text in self.legend.get_texts(): text.set_color('#CECECE')
 
 
+
+    # This function is responsible for changing the graphical mode of the application
+    # graphical_mode >  0   :   light mode
+    # graphical_mode <= 0   :   dark mode
     def set_graphical_mode(self, graphical_mode):
-        # graphical_mode >  0   :   light mode
-        # graphical_mode <= 0   :   dark mode
 
         self.graphical_mode = graphical_mode
 
