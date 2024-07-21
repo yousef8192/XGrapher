@@ -330,7 +330,6 @@ Curves customization            | Axes customization
     - m = number of fitting points = 5e1 * number of asymptotic points
     - n = number of x-point samples (constant determined by the code (roughly around 1e4))
 * Therefore according to this complexity, the function will require roughly 1 second of computational time for each 1e2 asymptotic point.
-* This complexity is by far acceptable, but for plotting equations with large number of asymptotic points it is recommended to go with amore efficient algorithmic approach that has a better time complexity than this one
 * It is experimentally found that 6e-1 and 5e1 are appropriate and suitable values that :
     1. Achieve the desired curve smoothnes around the asymptotic points
     2. Achieve an applicable execution time for the function according to its complexity
