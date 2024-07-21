@@ -81,8 +81,9 @@ Light Mode                | Dark Mode
 <br/>
 
 ## Introduction
-
+<p align="center">
 <img src="img/XGrapher_icon.png" width="200" height="200"/>
+</p>
 <br/>
 XGrapher is a cross-platform desktop graphing calculator written in Python. Despite being simple and lightweight, XGrapher provides the ability to graph an indispensable set of mathematical functions such as sqrt() and log10() and it can quickly graph almost every combination of mathematical equation composed of them alongside with other mathematical operators while providing the user with extensive options and customization settings. 
 XGrapher uses sophisticated and thoroughly optimized algorithms to compute the properties of the provided equation (such as domain the or asymptotic points if any) and check whether the user input conflicts with them and notifies the user accordingly if any error is encountered.
