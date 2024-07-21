@@ -1,5 +1,5 @@
 import pytest
-from xgrapher import *
+from _XGRAPHER_MAIN_ import *
 from PySide2 import QtCore # for button clicks
 
 
@@ -11,17 +11,6 @@ def app(qtbot):
     matplotlib.pyplot.close()   # to reduce total memory used by the test file and increase execution time
 
 
-
-
-
-
-
-
-
-
-
-
-######################################################################################### Logic Functions Test
 
 
 
@@ -84,227 +73,33 @@ def test_insert_fitting_points(app, qtbot):
 
     assert ((new_x_points_len==(old_x_points_len+num_points_to_add)) and (new_y_points_len==(old_y_points_len+num_points_to_add)))
 
+def test_update_min_max_coordinates(app, qtbot):
+     
+    app.min_y_in_graph = -100
+    app.max_y_in_graph = 100
+    app.min_x_in_graph = -100
+    app.max_x_in_graph = 100
+
+    old_min_y_in_graph = app.min_y_in_graph
+    old_max_y_in_graph = app.max_y_in_graph
+    old_min_x_in_graph = app.min_x_in_graph
+    old_max_x_in_graph = app.max_x_in_graph
+
+    a = old_min_x_in_graph-10
+    b = old_max_x_in_graph+10
+    c = b-a
+    d = old_min_y_in_graph-10
+    e = old_max_y_in_graph+10
+    f = e-d
+
+    x_points_intersection_range = [a, b]
+    y_points_intersection_range = [d, e]
+
+    update_min_max_coordinates(app, x_points_intersection_range, y_points_intersection_range)
+
+    assert ((app.min_y_in_graph==d-0.1*f) and (app.max_y_in_graph==e+0.1*f) and (app.min_x_in_graph==a-0.1*c) and (app.max_x_in_graph==b+0.1*c))
 
 
 
 
-
-
-
-
-
-
-######################################################################################### Input Sanitization and Error Handling Tests
-
-
-
-
-def test_input_without_equation(app, qtbot):
-    app.equation_field.setText('')
-    app.x_min_field.setText('10')
-    app.x_max_field.setText('-10')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == False)
-
-def test_input_with_garbage_equation(app, qtbot):
-    app.equation_field.setText('blabla')
-    app.x_min_field.setText('-100')
-    app.x_max_field.setText('100')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == False)
-
-def test_input_with_syntax_error_of_multiple_dots_in_the_same_number(app, qtbot):
-    app.equation_field.setText('12.2.2*x')
-    app.x_min_field.setText('-100')
-    app.x_max_field.setText('100')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == False)
-
-def test_input_with_syntax_error_of_not_using_the_asterik_for_multiply(app, qtbot):
-    app.equation_field.setText('12x')
-    app.x_min_field.setText('-100')
-    app.x_max_field.setText('100')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == False)
-
-def test_input_with_syntax_error_of_using_double_asterik_instead_of_cap_for_exponentiation(app, qtbot):
-    app.equation_field.setText('12**x')
-    app.x_min_field.setText('-100')
-    app.x_max_field.setText('100')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == False)
-
-def test_input_with_syntax_error_of_using_double_asterik_instead_of_cap_for_exponentiation(app, qtbot):
-    app.equation_field.setText('12**x')
-    app.x_min_field.setText('-100')
-    app.x_max_field.setText('100')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == False)
-
-def test_input_that_causes_overflow_due_to_an_extremly_rising_function(app, qtbot):
-    app.equation_field.setText('x^99999')
-    app.x_min_field.setText('-100')
-    app.x_max_field.setText('100')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == False)
-
-
-
-
-
-
-######################################################################################### Curve Plotting Tests
-
-def test_input_that_causes_overflow_due_to_extremely_large_input_range(app, qtbot):
-    app.equation_field.setText('x')
-    app.x_min_field.setText('-1e99999')
-    app.x_max_field.setText('1e99999')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == False)
-
-def test_input_with_no_range_inputted(app, qtbot):
-    app.equation_field.setText('x')
-    app.x_min_field.setText('')
-    app.x_max_field.setText('-10')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == False)
-
-def test_input_with_garbage_range_inputted(app, qtbot):
-    app.equation_field.setText('x')
-    app.x_min_field.setText('adsklfj')
-    app.x_max_field.setText('-10')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == False)
-
-def test_input_with_syntax_error_in_range_inputted(app, qtbot):
-    app.equation_field.setText('x')
-    app.x_min_field.setText('123.456.789')
-    app.x_max_field.setText('-10')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == False)
-
-def test_input_with_reversed_x_min_and_x_max(app, qtbot):
-    app.equation_field.setText('x')
-    app.x_min_field.setText('10')
-    app.x_max_field.setText('-10')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == False)
-
-
-
-
-
-
-
-
-
-######################################################################################### Curve Plotting Tests
-
-
-
-
-def test_graph_function_linear(app, qtbot):
-    app.equation_field.setText('x')
-    app.x_min_field.setText('-100')
-    app.x_max_field.setText('100')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == True)
-
-def test_graph_function_constant(app, qtbot):
-    app.equation_field.setText('-5')
-    app.x_min_field.setText('-100')
-    app.x_max_field.setText('100')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == True)
-
-def test_graph_function_x_over_x(app, qtbot):
-    app.equation_field.setText('x/x')
-    app.x_min_field.setText('-100')
-    app.x_max_field.setText('100')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == True)
-
-def test_graph_function_with_exponentiation_operator(app, qtbot):
-    app.equation_field.setText('x^2')
-    app.x_min_field.setText('-100')
-    app.x_max_field.setText('100')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == True)
-
-def test_graph_function_with_multiple_exponentiation_operator(app, qtbot):
-    app.equation_field.setText('x^2 + x^3 + x^4 + x^5')
-    app.x_min_field.setText('-100')
-    app.x_max_field.setText('100')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == True)
-
-def test_graph_function_with_no_asymptotic_points(app, qtbot):
-    app.equation_field.setText('x')
-    app.x_min_field.setText('-100')
-    app.x_max_field.setText('100')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == True)
-
-def test_graph_function_with_one_asymptotic_point(app, qtbot):
-    app.equation_field.setText('1/x')
-    app.x_min_field.setText('-10')
-    app.x_max_field.setText('10')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == True)
-
-def test_graph_function_with_two_asymptotic_points(app, qtbot):
-    app.equation_field.setText('1/((x-2)*(x+2))')
-    app.x_min_field.setText('-10')
-    app.x_max_field.setText('10')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == True)
-
-def test_graph_function_with_three_asymptotic_points(app, qtbot):
-    app.equation_field.setText('1/((x-2)*(x-55)*(x-100))')
-    app.x_min_field.setText('-1000')
-    app.x_max_field.setText('1000')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == True)
-
-def test_graph_function_sqrt_in_positive_interval(app, qtbot):
-    app.equation_field.setText('sqrt(x)')
-    app.x_min_field.setText('0')
-    app.x_max_field.setText('10')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == True)
-
-def test_graph_function_sqrt_in_negative_interval(app, qtbot):
-    app.equation_field.setText('sqrt(x)')
-    app.x_min_field.setText('-10')
-    app.x_max_field.setText('-1')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == False)
-
-def test_graph_function_sqrt_in_negative_and_positive_interval(app, qtbot):
-    app.equation_field.setText('sqrt(x)')
-    app.x_min_field.setText('-10')
-    app.x_max_field.setText('10')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == True)
-
-def test_graph_function_log10_in_positive_interval(app, qtbot):
-    app.equation_field.setText('log10(x)')
-    app.x_min_field.setText('0')
-    app.x_max_field.setText('10')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == True)
-
-def test_graph_function_log10_in_negative_interval(app, qtbot):
-    app.equation_field.setText('log10(x)')
-    app.x_min_field.setText('-10')
-    app.x_max_field.setText('-1')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == False)
-
-def test_graph_function_log10_in_negative_and_positive_interval(app, qtbot):
-    app.equation_field.setText('log10(x)')
-    app.x_min_field.setText('-10')
-    app.x_max_field.setText('10')
-    successfully_graphed = plot_equation(app, app.equation_field.text(), app.x_min_field.text(), app.x_max_field.text())
-    assert (successfully_graphed == True)
 
