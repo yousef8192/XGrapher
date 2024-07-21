@@ -46,6 +46,8 @@ Light Mode                | Dark Mode
   * [# Instant Plotting action &amp; Status Bar responsive animation](#-instant-plotting-action--status-bar-responsive-animation)
   * [# Zoom Sliders for both X and Y Axes](#-zoom-sliders-for-both-x-and-y-axes)
   * [# Toggleable Light and Dark Modes](#-toggleable-light-and-dark-modes)
+* [XGrapher DEMO (Customization Settings)](#xgrapher-demo-customization-settings)
+  * [# Extensive Graph Customization Settings :](#-extensive-graph-customization-settings-)
 * [Key Features](#key-features)
 * [Technical Details](#technical-details)
 * [Dependencies &amp; Installation](#dependencies--installation)
@@ -53,6 +55,8 @@ Light Mode                | Dark Mode
   * [Windows](#windows)
   * [MacOS](#macos)
 * [Future Improvements and Fixes to consider](#future-improvements-and-fixes-to-consider)
+
+
 
 
 <br/>
