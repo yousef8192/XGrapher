@@ -24,8 +24,8 @@ Light Mode                | Dark Mode
   * [# y = x/x](#-y--xx)
   * [# y = constant :](#-y--constant-)
   * [# y = x^2](#-y--x2)
-  * [# y = sqrt(x) in range [-10, 10]](#-y--sqrtx-in-range--10-10)
-  * [# y = log10(x) in range [-10, 10]](#-y--log10x-in-range--10-10)
+  * [# y = sqrt(x) in range range contains -ve and +ve [-10, 10]](#-y--sqrtx-in-range-range-contains--ve-and-ve--10-10)
+  * [# y = log10(x) in range range contains -ve and +ve [-10, 10]](#-y--log10x-in-range-range-contains--ve-and-ve--10-10)
   * [# y = 1/x (function with one asymptotic point)](#-y--1x-function-with-one-asymptotic-point)
   * [# y = 1/((x-2)*(x+2)) (function with two asymptotic points)](#-y--1x-2x2-function-with-two-asymptotic-points)
   * [# y = 1/((x-2)*(x-500)*(x-88)) (function with three asymptotic points)](#-y--1x-2x-500x-88-function-with-three-asymptotic-points)
@@ -53,6 +53,7 @@ Light Mode                | Dark Mode
   * [Windows](#windows)
   * [MacOS](#macos)
 * [Future Improvements and Fixes to consider](#future-improvements-and-fixes-to-consider)
+
 
 <br/>
 <!-- }}} -->
@@ -92,12 +93,12 @@ XGrapher uses sophisticated and thoroughly optimized algorithms to compute the p
 <br/>
 
 
-### # y = sqrt(x) in range [-10, 10]
+### # y = sqrt(x) in range range contains -ve and +ve [-10, 10]
 <img src="img/func_sqrt_x_in_positive_and_negative_interval.png" width="864" height="450"/>
 <br/>
 
 
-### # y = log10(x) in range [-10, 10]
+### # y = log10(x) in range range contains -ve and +ve [-10, 10]
 <img src="img/func_log10_x_in_positive_and_negative_interval.png" width="864" height="450"/>
 <br/>
 
