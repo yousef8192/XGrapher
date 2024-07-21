@@ -22,7 +22,7 @@ Light Mode                | Dark Mode
   * [Windows](#windows)
   * [MacOS](#macos)
 * [XGrapher DEMO (Overview)](#xgrapher-demo-overview)
-  * [# Instant Plotting action](#-instant-plotting-action)
+  * [# Instant Plotting action of Multiple Equations](#-instant-plotting-action-of-multiple-equations)
   * [# Status Bar responsive animation](#-status-bar-responsive-animation)
   * [# Zoom Sliders for both X and Y Axes](#-zoom-sliders-for-both-x-and-y-axes)
   * [# Toggleable Light and Dark Modes](#-toggleable-light-and-dark-modes)
@@ -188,7 +188,7 @@ Please ensure that you have python and the dependencies mentioned in the Linux s
 
 ## XGrapher DEMO (Overview)
 
-### # Instant Plotting action
+### # Instant Plotting action of Multiple Equations
 <img src="img/multiple_equations_demo.gif" width="864" height="435"/>
 <br/>
 
