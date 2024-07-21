@@ -229,7 +229,7 @@ Curves customization            | Axes customization
 
 * Fast, simple, and lightweight.
 
-* Well documented and tested code (40+ individual tests) which improves both user's and developer's experience. 
+* Well documented and tested code (40+ unit tests) which improves both user's and developer's experience. 
 
 * Trustworthy Input Sanitization Mechanism.
 
@@ -239,7 +239,7 @@ Curves customization            | Axes customization
 
 * Ability to compute the domain and asymptotic points of the specified function.
 
-* Ability to find the intersection between the specified range and the domain of the function to plot the curve within it.
+* Ability to compute the intersection between specified range and equation's domain to plot within it.
 
 * Ability to copy/cut/paste equations using the clipboard.
 
@@ -306,10 +306,10 @@ Please ensure that you have python and the dependencies mentioned in the Linux s
 <br/>
 <!-- }}} -->
 
-<!-- {{{Future Improvements and Fixes to consider --> 
+<!-- {{{Future Features, Improvements and Fixes to consider --> 
 <br/>
 
-## Future Improvements and Fixes to consider
+## Future Features, Improvements and Fixes to consider
 
 * Add support for the rest of the mathematical functions (such as trignometric functions) and the dirichlet function)
 
@@ -328,7 +328,6 @@ Please ensure that you have python and the dependencies mentioned in the Linux s
 * Improve icon colors in dark mode by inverting the colors so that they are more visible.
 
 * Improve the automatic view fitting for when there are multiple curves in the same graph.
-
 
 <br/>
 <!-- }}} -->
