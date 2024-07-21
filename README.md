@@ -204,6 +204,21 @@ XGrapher uses sophisticated and thoroughly optimized algorithms to compute the p
 <br/>
 <!-- }}} -->
 
+<!-- {{{XGrapher DEMO (Customization Settings) --> 
+<br/>
+
+## XGrapher DEMO (Customization Settings)
+
+### # Extensive Graph Customization Settings :
+Curves customization            | Axes customization
+:------------------------------:|:--------------------------------:
+![](img/options_page_demo.png)  | ![](img/options_page_demo_2.png) 
+<br/>
+
+
+<br/>
+<!-- }}} -->
+
 <!-- {{{Key Features --> 
 
 ## Key Features
@@ -229,12 +244,6 @@ XGrapher uses sophisticated and thoroughly optimized algorithms to compute the p
 * Responsive Gui and Status Bar.
 
 * Supports both Light and Dark Mode.
-
-* Extensive Graph customization settings:
-
-<br/>
-<img src="img/options_page_demo.png" width="370" height="520"/>
-<br/>
 
 * And much much more!!
 
