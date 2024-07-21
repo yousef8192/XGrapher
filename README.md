@@ -455,6 +455,8 @@ The following represents the Documentation the main methods of the class:
 
 * Ability to compute the intersection between specified range and equation's domain to plot within it.
 
+* Ability to save a snapshot of the graph in different file formats.
+
 * Ability to copy/cut/paste equations using the clipboard.
 
 * Improved user feedback throughout the session.
