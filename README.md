@@ -42,7 +42,7 @@ Light Mode                | Dark Mode
   * [# Input range has no intersection with equation's domain](#-input-range-has-no-intersection-with-equations-domain)
   * [# Overflow due to extremely rising/falling equation](#-overflow-due-to-extremely-risingfalling-equation)
   * [# Overflow due to extremely large input Range](#-overflow-due-to-extremely-large-input-range)
-* [XGrapher DEMO (Responsive Gui)](#xgrapher-demo-responsive-gui)
+* [XGrapher DEMO (Responsive GUI)](#xgrapher-demo-responsive-gui)
   * [# Instant Plotting action &amp; Status Bar responsive animation](#-instant-plotting-action--status-bar-responsive-animation)
   * [# Zoom Sliders for both X and Y Axes](#-zoom-sliders-for-both-x-and-y-axes)
   * [# Toggleable Light and Dark Modes](#-toggleable-light-and-dark-modes)
@@ -191,7 +191,7 @@ XGrapher uses sophisticated and thoroughly optimized algorithms to compute the p
 <!-- {{{XGrapher DEMO (Responsive Zoom Sliders) --> 
 <br/>
 
-## XGrapher DEMO (Responsive Gui)
+## XGrapher DEMO (Responsive GUI)
 
 ### # Instant Plotting action & Status Bar responsive animation
 <img src="img/demo_responsive_status_bar.gif" width="864" height="450"/>
@@ -245,7 +245,7 @@ Curves customization            | Axes customization
 
 * Improved user feedback throughout the session.
 
-* Responsive Gui and Status Bar.
+* Responsive GUI and Status Bar.
 
 * Supports both Light and Dark Mode.
 
@@ -277,17 +277,17 @@ Curves customization            | Axes customization
 
 ### Linux 
 
-Note, the following installation code works in any debian based distribution with the apt package manager, for other distributions please refer to their instructions for package installation.
-
+Note: the following installation code works in any debian based distribution with the apt package manager, for other distributions please refer to their instructions for package installation.
+Note: some commands might require super user privileges
 ```
-sudo apt install python3
-sudo apt install python3-matplotlib
-sudo apt install python3-numpy
-sudo apt install python3-sympy
-sudo apt install python3-pyside2
-sudo apt install python3-pyside2.qtcore
-sudo apt install python3-pyside2.qtwidgets
-sudo apt install python3-pyside2.qtgui
+apt install python3
+apt install python3-matplotlib
+apt install python3-numpy
+apt install python3-sympy
+apt install python3-pyside2
+apt install python3-pyside2.qtcore
+apt install python3-pyside2.qtwidgets
+apt install python3-pyside2.qtgui
 git clone https://github.com/yousef8192/XGrapher.git
 cd XGrapher
 python3 xgrapher.py
