@@ -96,43 +96,43 @@ XGrapher uses sophisticated and thoroughly optimized algorithms to compute the p
 ## XGrapher DEMO (Plotting)
 
 ### # y = x
-<img src="img/func_linear.png" width="864" height="450"/>
+<img src="img/func_linear.png" width="864" height="350"/>
 <br/>
 
 ### # y = x/x
-<img src="img/func_x_over_x.png" width="864" height="450"/>
+<img src="img/func_x_over_x.png" width="864" height="350"/>
 <br/>
 
 ### # y = constant
-<img src="img/func_constant.png" width="864" height="450"/>
+<img src="img/func_constant.png" width="864" height="350"/>
 <br/>
 
 ### # y = x^2
-<img src="img/func_x_square.png" width="864" height="450"/>
+<img src="img/func_x_square.png" width="864" height="350"/>
 <br/>
 
 
 ### # y = sqrt(x) in range range contains -ve and +ve [-100, 100]
-<img src="img/func_sqrt_x_in_positive_and_negative_interval.png" width="864" height="450"/>
+<img src="img/func_sqrt_x_in_positive_and_negative_interval.png" width="864" height="350"/>
 <br/>
 
 
 ### # y = log10(x) in range range contains -ve and +ve [-100, 100]
-<img src="img/func_log10_x_in_positive_and_negative_interval.png" width="864" height="450"/>
+<img src="img/func_log10_x_in_positive_and_negative_interval.png" width="864" height="350"/>
 <br/>
 
 
 ### # y = 1/x (function with one asymptotic point)
-<img src="img/func_one_asymptotic_point.png" width="864" height="450"/>
+<img src="img/func_one_asymptotic_point.png" width="864" height="350"/>
 <br/>
 
 ### # y = 1/((x-2)\*(x+2)) (function with two asymptotic points)
-<img src="img/func_two_asymptotic_points.png" width="864" height="450"/>
+<img src="img/func_two_asymptotic_points.png" width="864" height="350"/>
 <br/>
 
 
 ### # y = 1/((x-2)\*(x-500)\*(x-88)) (function with three asymptotic points)
-<img src="img/func_three_asymptotic_points.png" width="864" height="450"/>
+<img src="img/func_three_asymptotic_points.png" width="864" height="350"/>
 <br/>
 
 
