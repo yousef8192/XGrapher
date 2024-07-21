@@ -333,7 +333,7 @@ def update_min_max_coordinates(main_window, x_points_intersection_range, y_point
     # this case is handled by adding tolerance of +-10 around the horizontal line plotted so that the slider can operate in
     # this case happens for y only and not for x, since the user isn't allowed to enter the same value for x_min and 
     # x_max and if he did so this error will be handled in plot_equation() function
-    if (min_y_in_curve, max_y_in_curve):
+    if (min_y_in_curve == max_y_in_curve):
         min_y_in_curve = min_y_in_curve-10
         max_y_in_curve = max_y_in_curve+10
 

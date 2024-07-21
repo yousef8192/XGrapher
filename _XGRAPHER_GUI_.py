@@ -248,9 +248,9 @@ class XGrapherWindow(QMainWindow):
     def create_y_zoom_slider(self):
 
         self.y_zoom_slider = QSlider(Qt.Vertical)
-        self.y_zoom_slider.setMinimum(1)
-        self.y_zoom_slider.setMaximum(10000)
-        self.y_zoom_slider.setValue(1000)
+        self.y_zoom_slider.setMinimum(1)        # set to 1 not 0 since can't zoom to the same two points, there must be some tolerance
+        self.y_zoom_slider.setMaximum(10000)    # Set a large number then scale it in the slot for the sake of slider smoothnes
+        self.y_zoom_slider.setValue(1000)       # set value to 0.1*maximum
         
         self.y_zoom_slider.valueChanged.connect(self.y_zoom_slider_slot)
 
@@ -263,9 +263,9 @@ class XGrapherWindow(QMainWindow):
     def create_x_zoom_slider(self):
 
         self.x_zoom_slider = QSlider(Qt.Horizontal)
-        self.x_zoom_slider.setMinimum(1)
-        self.x_zoom_slider.setMaximum(10000)
-        self.x_zoom_slider.setValue(1000)
+        self.x_zoom_slider.setMinimum(1)     # set to 1 not 0 since can't zoom to the same two points, there must be some tolerance
+        self.x_zoom_slider.setMaximum(10000) # Set a large number then scale it in the slot for the sake of slider smoothnes
+        self.x_zoom_slider.setValue(1000)    # set value to 0.1*maximum
         
         self.x_zoom_slider.valueChanged.connect(self.x_zoom_slider_slot)
 
