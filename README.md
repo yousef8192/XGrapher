@@ -311,7 +311,7 @@ Please ensure that you have python and the dependencies mentioned in the Linux s
 
 ## Future Features, Improvements, and Fixes to consider
 
-* Add support for the rest of the mathematical functions such as trignometric functions) and the dirichlet function)
+* Add support for the rest of the mathematical functions (such as trignometric functions and the dirichlet function)
 
 * Add support for other graphing scales (such as the logarithmic scale) to be able to deal with other plot types that require them (such as bode plot)
 
