@@ -13,6 +13,12 @@ Light Mode                | Dark Mode
 
 * [Table of Contents](#table-of-contents)
 * [Introduction](#introduction)
+* [Key Features](#key-features)
+* [Technical Details](#technical-details)
+* [Dependencies &amp; Installation](#dependencies--installation)
+  * [Linux](#linux)
+  * [Windows](#windows)
+  * [MacOS](#macos)
 * [XGrapher DEMO (Plotting)](#xgrapher-demo-plotting)
   * [# y = x](#-y--x)
   * [# y = x/x](#-y--xx)
@@ -65,12 +71,6 @@ Light Mode                | Dark Mode
   * [11. status_bar_print(...)](#11-status_bar_print)
   * [12. update_legend(...)](#12-update_legend)
   * [13. set_graphical_mode(...)](#13-set_graphical_mode)
-* [Key Features](#key-features)
-* [Technical Details](#technical-details)
-* [Dependencies &amp; Installation](#dependencies--installation)
-  * [Linux](#linux)
-  * [Windows](#windows)
-  * [MacOS](#macos)
 * [Future Features, Improvements, and Fixes to consider](#future-features-improvements-and-fixes-to-consider)
 
 
@@ -87,6 +87,93 @@ Light Mode                | Dark Mode
 <br/>
 XGrapher is a cross-platform desktop graphing calculator written in Python. Despite being simple and lightweight, XGrapher provides the ability to graph an indispensable set of mathematical functions such as sqrt() and log10() and it can quickly graph almost every combination of mathematical equation composed of them alongside with other mathematical operators while providing the user with extensive options and customization settings. 
 XGrapher uses sophisticated and thoroughly optimized algorithms to compute the properties of the provided equation (such as domain the or asymptotic points if any) and check whether the user input conflicts with them and notifies the user accordingly if any error is encountered.
+
+<br/>
+<!-- }}} -->
+
+<!-- {{{Key Features --> 
+
+## Key Features
+
+* Fast, simple, and lightweight.
+
+* Well documented and tested code (40+ unit tests) which improves both user's and developer's experience. 
+
+* Trustworthy Input Sanitization Mechanism.
+
+* Exceptional Error Handling (such as x/0, sqrt(-ve), log(0), ...).
+
+* Efficient handling of Asymptotic Discontinuities in functions.
+
+* Ability to compute the domain and asymptotic points of the specified function.
+
+* Ability to compute the intersection between specified range and equation's domain to plot within it.
+
+* Ability to save a snapshot of the graph in different file formats.
+
+* Ability to copy/cut/paste equations using the clipboard.
+
+* Improved user feedback throughout the session.
+
+* Responsive GUI and Status Bar.
+
+* Supports both Light and Dark Mode.
+
+* And much much more!!
+
+<br/>
+<!-- }}} -->
+
+<!-- {{{Technical Details --> 
+
+## Technical Details
+
+* Supported OS : Linux/Windows/MacOS
+
+* Language : Python
+
+* GUI Framework : Pyside2
+
+* Graphing Framework : Matplotlib
+
+* Design Approach : Object Oriented Programming
+
+<br/>
+<!-- }}} -->
+
+<!-- {{{Dependencies & Installation  --> 
+
+## Dependencies & Installation
+
+### Linux 
+
+Note: the following installation code works in any debian based distribution with the apt package manager, for other distributions please refer to their instructions for package installation.
+<br/>
+<br/>
+Note: some commands might require super user privileges
+```
+apt install python3
+apt install python3-matplotlib
+apt install python3-numpy
+apt install python3-sympy
+apt install python3-pyside2
+apt install python3-pyside2.qtcore
+apt install python3-pyside2.qtwidgets
+apt install python3-pyside2.qtgui
+git clone https://github.com/yousef8192/XGrapher.git
+cd XGrapher
+python3 xgrapher.py
+```
+
+### Windows
+
+Please ensure that you have python and the dependencies mentioned in the Linux section successfully installed using pip or any other tools present in Windows then run the file xgrapher.py using the appropriate python command.
+
+
+### MacOS
+
+Please ensure that you have python and the dependencies mentioned in the Linux section successfully installed using pip or any other tools present in MacOS then run the file xgrapher.py using the appropriate python command.
+
 
 <br/>
 <!-- }}} -->
@@ -433,93 +520,6 @@ The following represents the Documentation the main methods of the class:
     - graphical_mode >  0   :   light mode
     - graphical_mode <= 0   :   dark mode
 
-
-
-<br/>
-<!-- }}} -->
-
-<!-- {{{Key Features --> 
-
-## Key Features
-
-* Fast, simple, and lightweight.
-
-* Well documented and tested code (40+ unit tests) which improves both user's and developer's experience. 
-
-* Trustworthy Input Sanitization Mechanism.
-
-* Exceptional Error Handling (such as x/0, sqrt(-ve), log(0), ...).
-
-* Efficient handling of Asymptotic Discontinuities in functions.
-
-* Ability to compute the domain and asymptotic points of the specified function.
-
-* Ability to compute the intersection between specified range and equation's domain to plot within it.
-
-* Ability to save a snapshot of the graph in different file formats.
-
-* Ability to copy/cut/paste equations using the clipboard.
-
-* Improved user feedback throughout the session.
-
-* Responsive GUI and Status Bar.
-
-* Supports both Light and Dark Mode.
-
-* And much much more!!
-
-<br/>
-<!-- }}} -->
-
-<!-- {{{Technical Details --> 
-
-## Technical Details
-
-* Supported OS : Linux/Windows/MacOS
-
-* Language : Python
-
-* GUI Framework : Pyside2
-
-* Graphing Framework : Matplotlib
-
-* Design Approach : Object Oriented Programming
-
-<br/>
-<!-- }}} -->
-
-<!-- {{{Dependencies & Installation  --> 
-
-## Dependencies & Installation
-
-### Linux 
-
-Note: the following installation code works in any debian based distribution with the apt package manager, for other distributions please refer to their instructions for package installation.
-<br/>
-<br/>
-Note: some commands might require super user privileges
-```
-apt install python3
-apt install python3-matplotlib
-apt install python3-numpy
-apt install python3-sympy
-apt install python3-pyside2
-apt install python3-pyside2.qtcore
-apt install python3-pyside2.qtwidgets
-apt install python3-pyside2.qtgui
-git clone https://github.com/yousef8192/XGrapher.git
-cd XGrapher
-python3 xgrapher.py
-```
-
-### Windows
-
-Please ensure that you have python and the dependencies mentioned in the Linux section successfully installed using pip or any other tools present in Windows then run the file xgrapher.py using the appropriate python command.
-
-
-### MacOS
-
-Please ensure that you have python and the dependencies mentioned in the Linux section successfully installed using pip or any other tools present in MacOS then run the file xgrapher.py using the appropriate python command.
 
 
 <br/>
