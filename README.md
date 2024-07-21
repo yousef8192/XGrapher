@@ -54,9 +54,7 @@ Light Mode                | Dark Mode
   * [Linux](#linux)
   * [Windows](#windows)
   * [MacOS](#macos)
-* [Future Improvements and Fixes to consider](#future-improvements-and-fixes-to-consider)
-
-
+* [Future Features, Improvements, and Fixes to consider](#future-features-improvements-and-fixes-to-consider)
 
 
 <br/>
@@ -308,10 +306,10 @@ Please ensure that you have python and the dependencies mentioned in the Linux s
 <br/>
 <!-- }}} -->
 
-<!-- {{{Future Features, Improvements and Fixes to consider --> 
+<!-- {{{Future Features, Improvements, and Fixes to consider --> 
 <br/>
 
-## Future Features, Improvements and Fixes to consider
+## Future Features, Improvements, and Fixes to consider
 
 * Add support for the rest of the mathematical functions (such as trignometric functions) and the dirichlet function)
 
