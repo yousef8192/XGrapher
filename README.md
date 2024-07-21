@@ -11,6 +11,8 @@ Light Mode                | Dark Mode
 
 ## Table of Contents
 
+
+
 * [Table of Contents](#table-of-contents)
 * [Introduction](#introduction)
 * [Key Features](#key-features)
@@ -19,22 +21,27 @@ Light Mode                | Dark Mode
   * [Linux](#linux)
   * [Windows](#windows)
   * [MacOS](#macos)
+* [XGrapher DEMO (Overview)](#xgrapher-demo-overview)
+  * [# Instant Plotting action](#-instant-plotting-action)
+  * [# Status Bar responsive animation](#-status-bar-responsive-animation)
+  * [# Zoom Sliders for both X and Y Axes](#-zoom-sliders-for-both-x-and-y-axes)
+  * [# Toggleable Light and Dark Modes](#-toggleable-light-and-dark-modes)
 * [XGrapher DEMO (Plotting)](#xgrapher-demo-plotting)
-  * [# y = x](#-y--x)
-  * [# y = x/x](#-y--xx)
-  * [# y = constant](#-y--constant)
-  * [# y = x^2](#-y--x2)
-  * [# y = sqrt(x) in range range contains -ve and +ve [-100, 100]](#-y--sqrtx-in-range-range-contains--ve-and-ve--100-100)
-  * [# y = log10(x) in range range contains -ve and +ve [-100, 100]](#-y--log10x-in-range-range-contains--ve-and-ve--100-100)
-  * [# y = 1/x (function with one asymptotic point)](#-y--1x-function-with-one-asymptotic-point)
-  * [# y = 1/((x-2)*(x+2)) (function with two asymptotic points)](#-y--1x-2x2-function-with-two-asymptotic-points)
-  * [# y = 1/((x-2)*(x-500)*(x-88)) (function with three asymptotic points)](#-y--1x-2x-500x-88-function-with-three-asymptotic-points)
+  * [# Equation : y = x](#-equation--y--x)
+  * [# Equation : y = x/x](#-equation--y--xx)
+  * [# Equation : y = constant](#-equation--y--constant)
+  * [# Equation : y = x^2](#-equation--y--x2)
+  * [# Equation : y = sqrt(x) in range contains -ve and +ve [-100, 100]](#-equation--y--sqrtx-in-range-contains--ve-and-ve--100-100)
+  * [# Equation : y = log10(x) in range contains -ve and +ve [-100, 100]](#-equation--y--log10x-in-range-contains--ve-and-ve--100-100)
+  * [# Equation : y = 1/x (function with one asymptotic point)](#-equation--y--1x-function-with-one-asymptotic-point)
+  * [# Equation : y = 1/((x-2)*(x+2)) (function with two asymptotic points)](#-equation--y--1x-2x2-function-with-two-asymptotic-points)
+  * [# Equation : y = 1/((x-2)*(x-500)*(x-88)) (function with three asymptotic points)](#-equation--y--1x-2x-500x-88-function-with-three-asymptotic-points)
 * [XGrapher DEMO (Input Sanitization)](#xgrapher-demo-input-sanitization)
   * [# Empty Equation Input](#-empty-equation-input)
   * [# Garbage Equation Input](#-garbage-equation-input)
   * [# Syntax Error in Equation Input 1](#-syntax-error-in-equation-input-1)
   * [# Syntax Error in Equation Input 2](#-syntax-error-in-equation-input-2)
-  * [# Using '**' instead of '^' for exponentiation](#-using--instead-of--for-exponentiation)
+  * [# Using '\*\*' instead of '^' for exponentiation](#-using--instead-of--for-exponentiation)
   * [# No Range inputted](#-no-range-inputted)
   * [# Garbage Range inputted](#-garbage-range-inputted)
   * [# Reversed Range inputted](#-reversed-range-inputted)
@@ -42,10 +49,6 @@ Light Mode                | Dark Mode
   * [# Input range has no intersection with equation's domain](#-input-range-has-no-intersection-with-equations-domain)
   * [# Overflow due to extremely rising/falling equation](#-overflow-due-to-extremely-risingfalling-equation)
   * [# Overflow due to extremely large input Range](#-overflow-due-to-extremely-large-input-range)
-* [XGrapher DEMO (Responsive GUI)](#xgrapher-demo-responsive-gui)
-  * [# Instant Plotting action &amp; Status Bar responsive animation](#-instant-plotting-action--status-bar-responsive-animation)
-  * [# Zoom Sliders for both X and Y Axes](#-zoom-sliders-for-both-x-and-y-axes)
-  * [# Toggleable Light and Dark Modes](#-toggleable-light-and-dark-modes)
 * [XGrapher DEMO (Customization Settings)](#xgrapher-demo-customization-settings)
   * [# Extensive Graph Customization Settings](#-extensive-graph-customization-settings)
 * [XGrapher Code Documentation (Logic Code)](#xgrapher-code-documentation-logic-code)
@@ -85,8 +88,8 @@ Light Mode                | Dark Mode
 <img src="img/XGrapher_icon.png" width="200" height="200"/>
 </p>
 <br/>
-XGrapher is a cross-platform desktop graphing calculator written in Python. Despite being simple and lightweight, XGrapher provides the ability to graph an indispensable set of mathematical functions such as sqrt() and log10() and it can quickly graph almost every combination of mathematical equation composed of them alongside with other mathematical operators while providing the user with extensive options and customization settings. 
-XGrapher uses sophisticated and thoroughly optimized algorithms to compute the properties of the provided equation (such as domain the or asymptotic points if any) and check whether the user input conflicts with them and notifies the user accordingly if any error is encountered.
+XGrapher is a cross-platform desktop graphing calculator written in Python. Despite being simple and lightweight, XGrapher provides the ability to graph an indispensable set of mathematical functions such as sqrt() and log10() and it can quickly graph almost every combination of mathematical equations composed of them alongside with other mathematical operators while providing the user with extensive options and customization settings. 
+XGrapher uses sophisticated and thoroughly optimized algorithms to compute the properties of the provided equation (such as equation's domain or asymptotic points if any) and check whether the user input conflicts with them and notifies the user accordingly if any error is encountered.
 
 <br/>
 <!-- }}} -->
@@ -104,6 +107,8 @@ XGrapher uses sophisticated and thoroughly optimized algorithms to compute the p
 * Exceptional Error Handling (such as x/0, sqrt(-ve), log(0), ...).
 
 * Efficient handling of Asymptotic Discontinuities in functions.
+
+* Ability to Plot multiple curves in the same graph and scale it accordingly.
 
 * Ability to compute the domain and asymptotic points of the specified function.
 
@@ -162,18 +167,42 @@ apt install python3-pyside2.qtwidgets
 apt install python3-pyside2.qtgui
 git clone https://github.com/yousef8192/XGrapher.git
 cd XGrapher
-python3 xgrapher.py
+python3 _XGRAPHER_MAIN_.py
 ```
 
 ### Windows
 
-Please ensure that you have python and the dependencies mentioned in the Linux section successfully installed using pip or any other tools present in Windows then run the file xgrapher.py using the appropriate python command.
+Please ensure that you have python and the dependencies mentioned in the Linux section successfully installed using pip or any other tools present in Windows then run the file _XGRAPHER_MAIN_.py using the appropriate python command.
 
 
 ### MacOS
 
-Please ensure that you have python and the dependencies mentioned in the Linux section successfully installed using pip or any other tools present in MacOS then run the file xgrapher.py using the appropriate python command.
+Please ensure that you have python and the dependencies mentioned in the Linux section successfully installed using pip or any other tools present in MacOS then run the file _XGRAPHER_MAIN_.py using the appropriate python command.
 
+
+<br/>
+<!-- }}} -->
+
+<!-- {{{XGrapher DEMO (Overview) --> 
+<br/>
+
+## XGrapher DEMO (Overview)
+
+### # Instant Plotting action
+<img src="img/multiple_equations_demo.gif" width="864" height="435"/>
+<br/>
+
+### # Status Bar responsive animation
+<img src="img/demo_responsive_status_bar.gif" width="864" height="435"/>
+<br/>
+
+### # Zoom Sliders for both X and Y Axes
+<img src="img/demo_zoom.gif" width="864" height="435"/>
+<br/>
+
+### # Toggleable Light and Dark Modes
+<img src="img/demo_toggle_graphical_mode.gif" width="864" height="435"/>
+<br/>
 
 <br/>
 <!-- }}} -->
@@ -183,43 +212,43 @@ Please ensure that you have python and the dependencies mentioned in the Linux s
 
 ## XGrapher DEMO (Plotting)
 
-### # y = x
+### # Equation : y = x
 <img src="img/func_linear.png" width="864" height="435"/>
 <br/>
 
-### # y = x/x
+### # Equation : y = x/x
 <img src="img/func_x_over_x.png" width="864" height="435"/>
 <br/>
 
-### # y = constant
+### # Equation : y = constant
 <img src="img/func_constant.png" width="864" height="435"/>
 <br/>
 
-### # y = x^2
+### # Equation : y = x^2
 <img src="img/func_x_square.png" width="864" height="435"/>
 <br/>
 
 
-### # y = sqrt(x) in range range contains -ve and +ve [-100, 100]
+### # Equation : y = sqrt(x) in range contains -ve and +ve [-100, 100]
 <img src="img/func_sqrt_x_in_positive_and_negative_interval.png" width="864" height="435"/>
 <br/>
 
 
-### # y = log10(x) in range range contains -ve and +ve [-100, 100]
+### # Equation : y = log10(x) in range contains -ve and +ve [-100, 100]
 <img src="img/func_log10_x_in_positive_and_negative_interval.png" width="864" height="435"/>
 <br/>
 
 
-### # y = 1/x (function with one asymptotic point)
+### # Equation : y = 1/x (function with one asymptotic point)
 <img src="img/func_one_asymptotic_point.png" width="864" height="435"/>
 <br/>
 
-### # y = 1/((x-2)\*(x+2)) (function with two asymptotic points)
+### # Equation : y = 1/((x-2)\*(x+2)) (function with two asymptotic points)
 <img src="img/func_two_asymptotic_points.png" width="864" height="435"/>
 <br/>
 
 
-### # y = 1/((x-2)\*(x-500)\*(x-88)) (function with three asymptotic points)
+### # Equation : y = 1/((x-2)\*(x-500)\*(x-88)) (function with three asymptotic points)
 <img src="img/func_three_asymptotic_points.png" width="864" height="435"/>
 <br/>
 
@@ -289,26 +318,6 @@ Please ensure that you have python and the dependencies mentioned in the Linux s
 <br/>
 
 
-<!-- }}} -->
-
-<!-- {{{XGrapher DEMO (Responsive Zoom Sliders) --> 
-<br/>
-
-## XGrapher DEMO (Responsive GUI)
-
-### # Instant Plotting action & Status Bar responsive animation
-<img src="img/demo_responsive_status_bar.gif" width="864" height="435"/>
-<br/>
-
-### # Zoom Sliders for both X and Y Axes
-<img src="img/demo_zoom.gif" width="864" height="435"/>
-<br/>
-
-### # Toggleable Light and Dark Modes
-<img src="img/demo_toggle_graphical_mode.gif" width="864" height="435"/>
-<br/>
-
-<br/>
 <!-- }}} -->
 
 <!-- {{{XGrapher DEMO (Customization Settings) --> 
