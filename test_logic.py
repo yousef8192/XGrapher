@@ -13,8 +13,6 @@ def app(qtbot):
 
 
 
-
-
 def test_compute_domain_one_over_x(app, qtbot):
     equation = '1/x'
     domain_returned = compute_domain(equation)

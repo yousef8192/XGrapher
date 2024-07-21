@@ -13,22 +13,6 @@ def app(qtbot):
 
 
 
-
-
-
-
-
-
-
-
-######################################################################################### Logic Functions Test
-
-
-
-
-
-
-
 def test_graph_function_linear(app, qtbot):
     app.equation_field.setText('x')
     app.x_min_field.setText('-100')

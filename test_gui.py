@@ -11,21 +11,6 @@ def app(qtbot):
     matplotlib.pyplot.close()   # to reduce total memory used by the test file and increase execution time
 
 
-
-
-
-
-
-
-
-
-
-
-######################################################################################### Logic Functions Test
-
-
-
-
 def test_application_initialization(app):
     assert app.status_bar.currentMessage() == "Welcome to XGrapher!! Please insert an equation to plot..."
 

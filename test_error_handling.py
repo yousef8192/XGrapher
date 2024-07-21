@@ -13,18 +13,6 @@ def app(qtbot):
 
 
 
-
-
-
-
-
-
-
-
-######################################################################################### Logic Functions Test
-
-
-
 def test_input_without_equation(app, qtbot):
     app.equation_field.setText('')
     app.x_min_field.setText('10')
@@ -75,12 +63,6 @@ def test_input_that_causes_overflow_due_to_an_extremly_rising_function(app, qtbo
     assert (successfully_graphed == False)
 
 
-
-
-
-
-######################################################################################### Curve Plotting Tests
-
 def test_input_that_causes_overflow_due_to_extremely_large_input_range(app, qtbot):
     app.equation_field.setText('x')
     app.x_min_field.setText('-1e99999')
@@ -121,10 +103,6 @@ def test_input_with_reversed_x_min_and_x_max(app, qtbot):
 
 
 
-
-
-
-######################################################################################### Curve Plotting Tests
 
 
 
