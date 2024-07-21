@@ -32,8 +32,8 @@ Light Mode                | Dark Mode
 * [XGrapher DEMO (Input Sanitization)](#xgrapher-demo-input-sanitization)
   * [# Empty Equation Input](#-empty-equation-input)
   * [# Garbage Equation Input](#-garbage-equation-input)
-  * [# Syntax Error in Equation Input](#-syntax-error-in-equation-input)
-  * [# Syntax Error in Equation Input](#-syntax-error-in-equation-input-1)
+  * [# Syntax Error in Equation Input 1](#-syntax-error-in-equation-input-1)
+  * [# Syntax Error in Equation Input 2](#-syntax-error-in-equation-input-2)
   * [# Using '**' instead of '^' for exponentiation](#-using--instead-of--for-exponentiation)
   * [# No Range inputted](#-no-range-inputted)
   * [# Garbage Range inputted](#-garbage-range-inputted)
@@ -134,11 +134,11 @@ XGrapher uses sophisticated and thoroughly optimized algorithms to compute the p
 <br/>
 
 
-### # Syntax Error in Equation Input
+### # Syntax Error in Equation Input 1
 <img src="img/input_sanitization_syntax_error_equation_1.png" width="864" height="450"/>
 <br/>
 
-### # Syntax Error in Equation Input
+### # Syntax Error in Equation Input 2
 <img src="img/input_sanitization_syntax_error_equation_2.png" width="864" height="450"/>
 <br/>
 
