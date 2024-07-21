@@ -350,10 +350,14 @@ def update_min_max_coordinates(main_window, x_points_intersection_range, y_point
     if ((max_y_in_curve > main_window.max_y_in_graph) and (max_y_in_curve != numpy.inf)):
         main_window.max_y_in_graph = max_y_in_curve + (0.1*curve_y_range) # the (0.1*curve_y_range) is for some tolerance
 
-    if (min_x_in_curve < main_window.min_x_in_graph):
+    # The numpy.inf condition is essential to be able to zoom in curves with asymptotic points, because these points 
+    # will have x value = +- inf thus x-zoom slider will cause an error when trying to compute the range it should zoom to
+    if (min_x_in_curve < main_window.min_x_in_graph and (min_x_in_curve != -numpy.inf)):
         main_window.min_x_in_graph = min_x_in_curve - (0.1*curve_x_range) # the (0.1*curve_x_range) is for some tolerance
 
-    if (max_x_in_curve > main_window.max_x_in_graph):
+    # The numpy.inf condition is essential to be able to zoom in curves with asymptotic points, because these points 
+    # will have x value = +- inf thus x-zoom slider will cause an error when trying to compute the range it should zoom to
+    if (max_x_in_curve > main_window.max_x_in_graph and (max_x_in_curve != numpy.inf)):
         main_window.max_x_in_graph = max_x_in_curve + (0.1*curve_x_range) # the (0.1*curve_x_range) is for some tolerance
 
 
