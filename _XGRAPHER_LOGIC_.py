@@ -198,48 +198,6 @@ def process_inputs(main_window, equation, x_min_inputted, x_max_inputted):
 
 
 # This function is called with each sucessful equation plotting attempt
-# It checks if the horizontal/vertical limits of it exceeds the maximum
-# horizontal/vertical limits of all equations plotted and if so it updates them
-# This function is essential to adjust the ranges in which the y & x zoom sliders operate within
-def update_min_max_coordinates(main_window, x_points_intersection_range, y_points_intersection_range):
-     
-    min_y_in_curve = min(y_points_intersection_range)
-    max_y_in_curve = max(y_points_intersection_range)
-    min_x_in_curve = min(x_points_intersection_range)
-    max_x_in_curve = max(x_points_intersection_range)
-    
-    # this case happens when the user enters an equation that yields the same value for all x points (for an instance x/x)
-    # this case is handled by adding tolerance of +-10 around the horizontal line plotted so that the slider can operate in
-    # this case happens for y only and not for x, since the user isn't allowed to enter the same value for x_min and 
-    # x_max and if he did so this error will be handled in plot_equation() function
-    if (min_y_in_curve, max_y_in_curve):
-        min_y_in_curve = min_y_in_curve-10
-        max_y_in_curve = max_y_in_curve+10
-
-    curve_y_range = max_y_in_curve-min_y_in_curve
-    curve_x_range = max_x_in_curve-min_x_in_curve
-    
-    # The numpy.inf condition is essential to be able to zoom in curves with asymptotic points, because these points 
-    # will have y value = +- inf thus y-zoom slider will cause an error when trying to compute the range it should zoom to
-    if ((min_y_in_curve < main_window.min_y_in_graph) and (min_y_in_curve != -numpy.inf)):
-        main_window.min_y_in_graph = min_y_in_curve - (0.1*curve_y_range) # the (0.1*curve_y_range) is for some tolerance
-
-    # The numpy.inf condition is essential to be able to zoom in curves with asymptotic points, because these points 
-    # will have y value = +- inf thus y-zoom slider will cause an error when trying to compute the range it should zoom to
-    if ((max_y_in_curve > main_window.max_y_in_graph) and (max_y_in_curve != numpy.inf)):
-        main_window.max_y_in_graph = max_y_in_curve + (0.1*curve_y_range) # the (0.1*curve_y_range) is for some tolerance
-
-    if (min_x_in_curve < main_window.min_x_in_graph):
-        main_window.min_x_in_graph = min_x_in_curve - (0.1*curve_x_range) # the (0.1*curve_x_range) is for some tolerance
-
-    if (max_x_in_curve > main_window.max_x_in_graph):
-        main_window.max_x_in_graph = max_x_in_curve + (0.1*curve_x_range) # the (0.1*curve_x_range) is for some tolerance
-
-
-        
-
-
-# This function is called with each sucessful equation plotting attempt
 # This function utilizes the sympy library to compute the domain of the equation 
 # This function is essential since we must check whether the equation's domain has 
 # an intersection with the range that the user inputted in which we can plot the curve in
@@ -358,5 +316,47 @@ def insert_fitting_points(asymptotic_points, x_points_intersection_range, y_poin
             x_points_intersection_range.insert(low, point)
             x = point # to substitute in the x present in the equation_exec
             y_points_intersection_range.insert(low, eval(equation_exec))
+
+
+# This function is called with each sucessful equation plotting attempt
+# It checks if the horizontal/vertical limits of it exceeds the maximum
+# horizontal/vertical limits of all equations plotted and if so it updates them
+# This function is essential to adjust the ranges in which the y & x zoom sliders operate within
+def update_min_max_coordinates(main_window, x_points_intersection_range, y_points_intersection_range):
+     
+    min_y_in_curve = min(y_points_intersection_range)
+    max_y_in_curve = max(y_points_intersection_range)
+    min_x_in_curve = min(x_points_intersection_range)
+    max_x_in_curve = max(x_points_intersection_range)
+    
+    # this case happens when the user enters an equation that yields the same value for all x points (for an instance x/x)
+    # this case is handled by adding tolerance of +-10 around the horizontal line plotted so that the slider can operate in
+    # this case happens for y only and not for x, since the user isn't allowed to enter the same value for x_min and 
+    # x_max and if he did so this error will be handled in plot_equation() function
+    if (min_y_in_curve, max_y_in_curve):
+        min_y_in_curve = min_y_in_curve-10
+        max_y_in_curve = max_y_in_curve+10
+
+    curve_y_range = max_y_in_curve-min_y_in_curve
+    curve_x_range = max_x_in_curve-min_x_in_curve
+    
+    # The numpy.inf condition is essential to be able to zoom in curves with asymptotic points, because these points 
+    # will have y value = +- inf thus y-zoom slider will cause an error when trying to compute the range it should zoom to
+    if ((min_y_in_curve < main_window.min_y_in_graph) and (min_y_in_curve != -numpy.inf)):
+        main_window.min_y_in_graph = min_y_in_curve - (0.1*curve_y_range) # the (0.1*curve_y_range) is for some tolerance
+
+    # The numpy.inf condition is essential to be able to zoom in curves with asymptotic points, because these points 
+    # will have y value = +- inf thus y-zoom slider will cause an error when trying to compute the range it should zoom to
+    if ((max_y_in_curve > main_window.max_y_in_graph) and (max_y_in_curve != numpy.inf)):
+        main_window.max_y_in_graph = max_y_in_curve + (0.1*curve_y_range) # the (0.1*curve_y_range) is for some tolerance
+
+    if (min_x_in_curve < main_window.min_x_in_graph):
+        main_window.min_x_in_graph = min_x_in_curve - (0.1*curve_x_range) # the (0.1*curve_x_range) is for some tolerance
+
+    if (max_x_in_curve > main_window.max_x_in_graph):
+        main_window.max_x_in_graph = max_x_in_curve + (0.1*curve_x_range) # the (0.1*curve_x_range) is for some tolerance
+
+
+        
 
 

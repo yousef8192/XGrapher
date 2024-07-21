@@ -27,16 +27,14 @@ class XGrapherWindow(QMainWindow):
         self.create_keypad() 
         self.create_range_fields() 
         self.create_graph() 
-        self.create_y_range_slider()
-        self.create_x_range_slider()
+        self.create_y_zoom_slider()
+        self.create_x_zoom_slider()
 
         self.create_tool_bar()
         self.create_status_bar()
 
         self.graphical_mode = 1  # light mode
         self.set_graphical_mode(self.graphical_mode)
-
-
 
 
     # This method is repsonsible for creating the Tool Bar 
@@ -218,14 +216,9 @@ class XGrapherWindow(QMainWindow):
 
 
 
-
     # This method is repsonsible for creating the graph in which we will plot into 
     def create_graph(self):
         
-        self.min_y_in_graph = -0.05
-        self.max_y_in_graph = 0.05
-        self.min_x_in_graph = -0.05
-        self.max_x_in_graph = 0.05
 
         self.figure = matplotlib.pyplot.figure(figsize=(8, 4))
         self.canvas = FigureCanvas(self.figure)
@@ -238,6 +231,11 @@ class XGrapherWindow(QMainWindow):
         self.graph.plot()
         self.x_axis = self.graph.axhline(y=0, color='#000000', linewidth=1)
         self.y_axis = self.graph.axvline(x=0, color='#000000', linewidth=1)
+        
+        self.min_y_in_graph = self.graph.get_ylim()[0]
+        self.max_y_in_graph = self.graph.get_ylim()[1]
+        self.min_x_in_graph = self.graph.get_xlim()[0]
+        self.max_x_in_graph = self.graph.get_xlim()[1]
 
         self.legend = self.graph.legend('', loc='upper left')
         self.legend.set_visible(False) 
