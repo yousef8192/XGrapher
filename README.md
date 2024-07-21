@@ -277,7 +277,9 @@ Curves customization            | Axes customization
 
 ### Linux 
 
-Note: the following installation code works in any debian based distribution with the apt package manager, for other distributions please refer to their instructions for package installation.<br/>
+Note: the following installation code works in any debian based distribution with the apt package manager, for other distributions please refer to their instructions for package installation.
+<br/>
+<br/>
 Note: some commands might require super user privileges
 ```
 apt install python3
