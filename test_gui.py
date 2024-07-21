@@ -2,11 +2,6 @@ import pytest
 from xgrapher import *
 from PySide2 import QtCore # for button clicks
 
-
-# Please notice that each time a gui window instance is instantiated, a direcotry named __PYCACHE__ is created with a file named test_...
-# This file slows down the execution of the test attempts (deleting the file/directory is useless since it will be created again during execution)
-# Thus it is recommended to insert a terminating character (such as ctrl+c in bash) to abort testing of this file and continue with the tests in interest
-
 @pytest.fixture
 def app(qtbot):
     window = XGrapherWindow(1920, 1080)
