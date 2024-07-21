@@ -286,8 +286,8 @@ class XGrapherWindow(QMainWindow):
         y_min_new             = y_mid - slider_value_scaled*y_half_range
         y_max_new             = y_mid + slider_value_scaled*y_half_range
 
-        self.graph.set_ylim(y_min_new, y_max_new)
-        self.canvas.draw()
+        self.graph.set_ylim(y_min_new, y_max_new)   # Set the new y-limits
+        self.canvas.draw()                          # Refresh the graph
 
 
 
@@ -305,8 +305,8 @@ class XGrapherWindow(QMainWindow):
         x_min_new             = x_mid - slider_value_scaled*x_half_range
         x_max_new             = x_mid + slider_value_scaled*x_half_range
 
-        self.graph.set_xlim(x_min_new, x_max_new)
-        self.canvas.draw()
+        self.graph.set_xlim(x_min_new, x_max_new)   # Set the new x-limits
+        self.canvas.draw()                          # Refresh the graph
 
 
 
