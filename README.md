@@ -47,7 +47,7 @@ Light Mode                | Dark Mode
   * [# Zoom Sliders for both X and Y Axes](#-zoom-sliders-for-both-x-and-y-axes)
   * [# Toggleable Light and Dark Modes](#-toggleable-light-and-dark-modes)
 * [XGrapher DEMO (Customization Settings)](#xgrapher-demo-customization-settings)
-  * [# Extensive Graph Customization Settings :](#-extensive-graph-customization-settings-)
+  * [# Extensive Graph Customization Settings](#-extensive-graph-customization-settings)
 * [Key Features](#key-features)
 * [Technical Details](#technical-details)
 * [Dependencies &amp; Installation](#dependencies--installation)
@@ -213,7 +213,7 @@ XGrapher uses sophisticated and thoroughly optimized algorithms to compute the p
 
 ## XGrapher DEMO (Customization Settings)
 
-### # Extensive Graph Customization Settings :
+### # Extensive Graph Customization Settings
 Curves customization            | Axes customization
 :------------------------------:|:--------------------------------:
 ![](img/options_page_demo.png)  | ![](img/options_page_demo_2.png) 
