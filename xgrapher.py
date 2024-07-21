@@ -2,7 +2,6 @@
 XGrapher
 
 @ Author: Yousef Mohammed
-@ All rights reserved (or....???)
 
 """
 
