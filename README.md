@@ -144,39 +144,39 @@ XGrapher uses sophisticated and thoroughly optimized algorithms to compute the p
 ## XGrapher DEMO (Input Sanitization)
 
 ### # Empty Equation Input
-<img src="img/input_sanitization_empty_equation.png" width="864" height="450"/>
+<img src="img/input_sanitization_empty_equation.png" width="864" height="350"/>
 <br/>
 
 
 ### # Garbage Equation Input
-<img src="img/input_sanitization_garbage_equation.png" width="864" height="450"/>
+<img src="img/input_sanitization_garbage_equation.png" width="864" height="350"/>
 <br/>
 
 
 ### # Syntax Error in Equation Input 1
-<img src="img/input_sanitization_syntax_error_equation_1.png" width="864" height="450"/>
+<img src="img/input_sanitization_syntax_error_equation_1.png" width="864" height="350"/>
 <br/>
 
 ### # Syntax Error in Equation Input 2
-<img src="img/input_sanitization_syntax_error_equation_2.png" width="864" height="450"/>
+<img src="img/input_sanitization_syntax_error_equation_2.png" width="864" height="350"/>
 <br/>
 
 ### # Using '\*\*' instead of '^' for exponentiation
-<img src="img/input_sanitization_syntax_error_double_asterik_instead_of_cap.png" width="864" height="450"/>
+<img src="img/input_sanitization_syntax_error_double_asterik_instead_of_cap.png" width="864" height="350"/>
 <br/>
 
 
 ### # No Range inputted
-<img src="img/input_sanitization_no_range.png" width="864" height="450"/>
+<img src="img/input_sanitization_no_range.png" width="864" height="350"/>
 <br/>
 
 
 ### # Garbage Range inputted
-<img src="img/input_sanitization_garbage_range.png" width="864" height="450"/>
+<img src="img/input_sanitization_garbage_range.png" width="864" height="350"/>
 <br/>
 
 ### # Reversed Range inputted
-<img src="img/input_sanitization_reversed_range.png" width="864" height="450"/>
+<img src="img/input_sanitization_reversed_range.png" width="864" height="350"/>
 <br/>
 
 
@@ -188,16 +188,16 @@ XGrapher uses sophisticated and thoroughly optimized algorithms to compute the p
 ## XGrapher DEMO (Error Handling)
 
 ### # Input range has no intersection with equation's domain
-<img src="img/error_handling_no_intersection_with_domain.png" width="864" height="450"/>
+<img src="img/error_handling_no_intersection_with_domain.png" width="864" height="350"/>
 <br/>
 
 
 ### # Overflow due to extremely rising/falling equation
-<img src="img/error_handling_overflow_due_to_equation.png" width="864" height="450"/>
+<img src="img/error_handling_overflow_due_to_equation.png" width="864" height="350"/>
 <br/>
 
 ### # Overflow due to extremely large input Range
-<img src="img/error_handling_overflow_due_to_range.png" width="864" height="450"/>
+<img src="img/error_handling_overflow_due_to_range.png" width="864" height="350"/>
 <br/>
 
 
@@ -209,15 +209,15 @@ XGrapher uses sophisticated and thoroughly optimized algorithms to compute the p
 ## XGrapher DEMO (Responsive GUI)
 
 ### # Instant Plotting action & Status Bar responsive animation
-<img src="img/demo_responsive_status_bar.gif" width="864" height="450"/>
+<img src="img/demo_responsive_status_bar.gif" width="864" height="350"/>
 <br/>
 
 ### # Zoom Sliders for both X and Y Axes
-<img src="img/demo_zoom.gif" width="864" height="450"/>
+<img src="img/demo_zoom.gif" width="864" height="350"/>
 <br/>
 
 ### # Toggleable Light and Dark Modes
-<img src="img/demo_toggle_graphical_mode.gif" width="864" height="450"/>
+<img src="img/demo_toggle_graphical_mode.gif" width="864" height="350"/>
 <br/>
 
 <br/>
